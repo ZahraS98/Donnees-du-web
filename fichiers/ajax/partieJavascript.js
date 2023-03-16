@@ -197,3 +197,19 @@ function replaceSVG(event){
     console.log(event.target.value, svg_title);
     // var svg = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/exemple.svg');
 }
+function makeClickableShapes(){
+    // second child of svg is the <g> tag and the child nodes of <g> tag are the shapes with specific ID.
+    var formes = document.getElementById("lesFormes").children;
+    formes = formes[0];
+    for (var form  of formes.childNodes){
+        if(form.nodeName !== "#text"){
+            form.addEventListener("click", (event)=>{
+                alert(event.target.id);
+            });
+        }
+    }   
+}
+
+function getCountryNodeList(){
+    var countries = document.getElementById("lesFormes").children;
+}
