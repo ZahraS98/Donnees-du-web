@@ -36,7 +36,7 @@
 
                 <tr>
                 <td>Flag:</td>
-                <td><img src="http://www.geonames.org/flags/x/{translate(//country[country_codes/*=$param_ref_type]/country_codes/cca2, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')}.gif" height="40" width="60"/></td>
+                <td><img src="http://www.geonames.org/flags/x/{translate(//country[country_codes/*=$country_code]/country_codes/cca2, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')}.gif" height="40" width="60"/></td>
                 </tr>
                 
                 </tbody>
