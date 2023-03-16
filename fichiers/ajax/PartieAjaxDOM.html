@@ -10,35 +10,35 @@
 
 </head>
 
-<body> <p>Fichier � modifier/comp�lter</p>
+<body> <p>Fichier &agrave; modifier/comp&egrave;lter</p>
     <p>
         Remplace le texte "LES NOMS" avec le contenu du champ de saisi: <br/>
 		<input name="button" type="button" id="myButton1" onClick="setNom(document.getElementById('myText1').value);" value="1. AJAX simple" />
         <input name="text" type="text" id="myText1" value="Toto" />
         <br/><br/>
-        Charge le fichier Employees.xml en ajax, cherche du contenu en javascript et remplace le texte "LES NOMS" avec le sr�sultat
+        Charge le fichier Employees.xml en ajax, cherche du contenu en javascript et remplace le texte "LES NOMS" avec le sr&egrave;sultat
 		<br />
         <input name="button2" type="button" id="myButton2" onClick="Bouton2_ajaxEmployees('Employees.xml');" value="2. AJAX avec Employees.xml" />
        
 		<br />
 		<br/>
-		Charge me un fichier XML contenant des r�f�rences bibliographiques, une feuille de style, applique la feuille de stymle sur le fichier XML et affiche le r�sultat en bas de la page:
+		Charge me un fichier XML contenant des r&egrave;f&egrave;rences bibliographiques, une feuille de style, applique la feuille de stymle sur le fichier XML et affiche le r&egrave;sultat en bas de la page:
 		<br/>
         <input name="button3" type="button" id="myButton2" onClick="Bouton3_ajaxBibliographie('ajax.bib.xml','ajax.bib.xsl','element_a_recuperer');" value="3. AJAX avec ajax.bib.xml/ajax.bib.xsl pour les livres (Book)" />
 
 		<br />
 		<br/>
-		Charge me un fichier XML contenant des r�f�rences bibliographiques, une feuille de style, r�cup�re le choix de type de bibliographie, le passe en param�tre � la feuille de style, applique la feuille de stymle sur le fichier XML et affiche le r�sultat en bas de la page:
+		Charge me un fichier XML contenant des r&egrave;f&egrave;rences bibliographiques, une feuille de style, r&egrave;cup&eacute;re le choix de type de bibliographie, le passe en param&eacute;tre &agrave; la feuille de style, applique la feuille de stymle sur le fichier XML et affiche le r&egrave;sultat en bas de la page:
 		<br/>
-		 <label for="cars">Type de r�f�rence biblio :</label>
+		 <label for="cars">Type de r&egrave;f&egrave;rence biblio :</label>
 
 		<select name="cars" id="type_ref_bibliographiques">
 		  <option value="Book">Livre</option>
 		  <option value="ArticleInJournal">Article dans un journal</option>
-		  <option value="Proceedings">Article dans conf�rence</option>
+		  <option value="Proceedings">Article dans conf&egrave;rence</option>
 		</select> 
 		<br/>
-        <input name="button4" type="button" id="myButton4" onClick="Bouton4_ajaxBibliographieAvecParametres('ajax.bib.xml','ajax.bibParam.xsl','element_a_recuperer', document.getElementById('type_ref_bibliographiques').value);" value="4. AJAX avec ajax.bib.xml/ajax.bibParam.xsl et un param�tre" />
+        <input name="button4" type="button" id="myButton4" onClick="Bouton4_ajaxBibliographieAvecParametres('ajax.bib.xml','ajax.bibParam.xsl','element_a_recuperer', document.getElementById('type_ref_bibliographiques').value);" value="4. AJAX avec ajax.bib.xml/ajax.bibParam.xsl et un param&agrave;tre" />
         
 		</p>
         <input name="button5" type="button" id="myButton5" onClick="changeBg();" value="Dark mode" />
