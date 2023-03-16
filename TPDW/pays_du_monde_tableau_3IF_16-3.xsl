@@ -73,7 +73,14 @@
 					</xsl:for-each>
 				</td>
 				<td><img src="http://www.geonames.org/flags/x/fr.gif" height="40" width="60"/></td>
-				<td><xsl:value-of select="../languages"/></td>
+				<td>
+					<xsl:for-each select= "../languages/*">
+						<xsl:value-of select= "text()"/>
+						<xsl:if test= "position() !=last()">
+							,							
+						</xsl:if>
+					</xsl:for-each>
+				</td>
 			</tr>
 		</xsl:for-each>
 		</tbody>
