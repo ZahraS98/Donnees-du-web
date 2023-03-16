@@ -65,8 +65,11 @@
 					Longitude :<xsl:value-of select="../coordinates/@lat"/>
 				</td>
 				<td> 
-					<xsl:for-each select="../borders/*"> 
-						<xsl:value-of select="current()"/> ,
+					<xsl:for-each select="../borders/neighbour"> 
+						<xsl:value-of select="//country[country_codes/*=current()]/country_name/common_name"/> 
+						<xsl:if test= "position() !=last()">
+							,							
+						</xsl:if>
 					</xsl:for-each>
 				</td>
 				<td><img src="http://www.geonames.org/flags/x/fr.gif" height="40" width="60"/></td>
