@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <title>TP 3IF Ajax</title>
     <meta name="author" content="El�d EGYED-ZSIGMOND">
-
+    <link rel="stylesheet" href="ExerciceAjax.css">
     <script type="text/javascript" src="partieJavascript.js"></script>
 
 </head>
@@ -44,21 +44,26 @@
         <input name="button5" type="button" id="myButton5" onClick="changeBg();" value="Dark mode" />
         <input name="button6" type="button" id="myButton6" onClick="resetBg();" value="Reset Bg" />
         <input name="button7" type="button" id="myButton7" onClick="loadSVG('exemple.svg');" value="load svg" />
-        <input name="button8" type="button" id="myButton8" onClick="makeClickableShapes()" value="make shapes clickable" />
+        <input name="button8" type="button" id="myButton8" onClick="makeClickableShapes()" value="make shapes clickable" /><br/>
         <input name="button9" type="button" id="myButton9" onClick="loadSVG('worldHigh.svg');" value="load map" />
+        <input name="button10" type="button" id="myButton10" onClick="makeClickableMap()" value="make map clickable" />
+        <input name="button11" type="button" id="myButton11" onClick="enableMapHover()" value="make map hoverable " />
     <div>
         <p>Les noms sont : <br/>
             <span id="id_nom_a_remplacer" style="color: red; font-weight: bold;">LES NOMS (Cet &eacute;l&eacute;ment va &ecirc;tre remplac&eacute; par les noms) </span>.</p>
     </div>
     <div>
-        <input name="countrycode" id="countrycode" onChange="cherchePays();" type="text" placeholder="enter pay"/>
+        <input name="countrycode" id="countrycode" onChange="cherchePays(document.getElementById('countrycode').value);" type="text" placeholder="enter pay"/>
         
     </div>
     <br/>
     <div id="id_element_a_remplacer">
         <p style="color: red; font-weight: bold;">Cet &eacute;l&eacute;ment va &ecirc;tre remplac&eacute; par une bibliographie en XML mise en forme par une feuille de style XSLT...</p>
     </div>
+    <div id="country_info_table">
+        
 
+    </div>
 
 </body>
 

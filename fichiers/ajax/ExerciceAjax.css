@@ -31,3 +31,11 @@
 	font-style: italic;
 	color: #006600;
 }
+
+.land_onhover{
+  fill: #006600;
+  fill-opacity: 1;
+  stroke:white;
+  stroke-opacity: 1;
+  stroke-width:0.5;
+}

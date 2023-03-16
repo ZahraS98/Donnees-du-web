@@ -170,7 +170,8 @@ function cherchePays(val){
     xsltProcessor.importStylesheet(xslDocument);
 
 	//passage du param�tre � la feuille de style
-	xsltProcessor.setParameter("", "param_ref_type", val);
+    console.log(val)
+	xsltProcessor.setParameter(null, "param_ref_type", val);
 
     // Chargement du fichier XML � l'aide de XMLHttpRequest synchrone 
     var xmlDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml');
@@ -204,12 +205,72 @@ function makeClickableShapes(){
     for (var form  of formes.childNodes){
         if(form.nodeName !== "#text"){
             form.addEventListener("click", (event)=>{
-                alert(event.target.id);
+                alert(event.target.getAttribute("title"));
             });
         }
     }   
 }
 
 function getCountryNodeList(){
-    var countries = document.getElementById("lesFormes").children;
+    var countries = document.getElementsByTagName("g")[0].childNodes;
+    console.log(countries);
+    var countries_array = new Array();
+    for (var country of countries){
+        if(country.nodeName !== "#text") countries_array.push(country);            
+    }
+    return countries_array
 }
+
+// Button 7 
+function makeClickableMap(){
+    var countries = getCountryNodeList();
+    for (var country of countries){
+        // event on
+        country.addEventListener('click', (event)=>{
+            console.log(event.target.getAttribute("id"));
+            alert(event.target.getAttribute("countryname"))
+        });
+    }
+}
+// 
+function enableMapHover(){
+    var countries = getCountryNodeList();
+    for (var country of countries){
+        // event on
+        country.addEventListener('mouseover', (event)=>{
+            console.log(event.target.getAttribute("id"));
+            // code to show the details in table.
+            event.target.setAttribute('class', 'land_onhover');
+            document.getElementById('country_info_table').innerHTML = event.target.getAttribute("countryname");
+        });
+        country.addEventListener('mouseleave', (event)=>{
+            console.log('leave');
+            event.target.setAttribute('class', 'land');
+            // code to show the details in table.
+        });
+    }
+}
+
+function infoPays(val){
+    
+    var xslDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/infoPays.xsl') ;
+    var xsltProcessor = new XSLTProcessor();
+    // Importation du .xsl
+    xsltProcessor.importStylesheet(xslDocument);
+
+	//passage du param�tre � la feuille de style
+	xsltProcessor.setParameter("", "param_ref_type", val);
+
+    // Chargement du fichier XML � l'aide de XMLHttpRequest synchrone 
+    var xmlDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml');
+
+    // Cr�ation du document XML transform� par le XSL
+    var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
+    // Recherche du parent (dont l'id est "here") de l'�l�ment � remplacer dans le document HTML courant
+    var elementHtmlParent = window.document.getElementById("id_element_a_remplacer");
+	// ins�rer l'�lement transform� dans la page html
+    elementHtmlParent.innerHTML = newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML;
+    console.log(newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML);
+
+}
+
