@@ -92,62 +92,7 @@
 			</xsl:if>
 		</xsl:for-each>
 
-		<h4>South America (15 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Central America (7 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Northern America (7 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-
-		<!--Asia-->
-		<h3>Pays du continent : Asia par sous-régions :</h3>
-		<h4>Southern Asia (9 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Western Asia (17 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>South-Eastern Asia (11 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Eastern Asia (8 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Central Asia (5 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-
-		<!--Africa-->
-		<h3>Pays du continent : Africa par sous-régions :</h3>
-		<h4>Middle Africa (10 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Eastern Africa (20 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Western Africa (16 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Southern Africa (5 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Northern Africa (7 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-
-		<!--Europe-->
-		<h3>Pays du continent : Europe par sous-régions :</h3>
-		<h4>Northern Europe (16 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Southern Europe (16 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Central Europe (5 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Western Europe (8 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Eastern Europe (8 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-
-		<!--Oceania-->
-		<h3>Pays du continent : Oceania par sous-régions :</h3>
-		<h4>Polynesia (10 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Australia and New Zealand (5 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Melanesia (5 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
-		<h4>Micronesia (7 pays)</h4>
-		<table border="3" width="100%" align="center"></table>
+		
 
 		</body>
 	</html>
