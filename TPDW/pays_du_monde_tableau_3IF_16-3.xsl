@@ -68,14 +68,21 @@
 								Longitude :<xsl:value-of select="../coordinates/@lat"/>
 							</td>
 							<td> 
-								<xsl:for-each select="../borders/neighbour"> 
-									<xsl:value-of select="//country[country_codes/*=current()]/country_name/common_name"/> 
-									<xsl:if test= "position() !=last()">
-										,							
-									</xsl:if>
-								</xsl:for-each>
+								<xsl:choose>
+									<xsl:when test="../borders/neighbour">
+										<xsl:for-each select="../borders/neighbour"> 
+											<xsl:value-of select="//country[country_codes/*=current()]/country_name/common_name"/> 
+											<xsl:if test= "position() !=last()">
+												,							
+											</xsl:if>
+										</xsl:for-each>
+									</xsl:when>
+									<xsl:otherwise>
+											Island
+									</xsl:otherwise>
+								</xsl:choose>
 							</td>
-							<td><img src="http://www.geonames.org/flags/x/fr.gif" height="40" width="60"/></td>
+							<td><img src="http://www.geonames.org/flags/x/{translate(../country_codes/cca2, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')}.gif" height="40" width="60"/></td>
 							<td>
 								<xsl:for-each select= "../languages/*">
 									<xsl:value-of select= "text()"/>
