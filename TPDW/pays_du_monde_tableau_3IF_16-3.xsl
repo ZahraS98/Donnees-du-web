@@ -39,54 +39,56 @@
 		<hr/>
 
 		<!--Americas-->
-	<xsl:for-each select="//country/infosContinent/continent[not(text()=preceding::continent/text())]">
-		<xsl:if test="current() !=''">
-			<h3>Pays du continent : <xsl:value-of select="current()"/> par sous-régions :</h3>
-				<h4><xsl:value-of select="//country/infosContinent[continent=current()]/subregion[not(text()=preceding::subregion/text())]"/> (27 pays)</h4>
+		<xsl:for-each select="//country/infosContinent/continent[not(text()=preceding::continent/text())]">
+			<xsl:if test="current() !=''">
+				<h3>Pays du continent : <xsl:value-of select="current()"/> par sous-régions :</h3>
+				<xsl:for-each select="//country/infosContinent[continent=current()]/subregion[not(text()=preceding::subregion/text())]">
+					<h4> <xsl:value-of select="current()"/> (27 pays)</h4>
 
-				<table border="3" width="600" align="center">
-				<tbody>
-					<tr>
-						<th>N°</th>
-						<th>Name</th>
-						<th>Capital</th>
-						<th>Coordinates</th>
-						<th>Neigbors</th>
-						<th>Flag</th>
-						<th>Spoken languages</th>
-					</tr>
+					<table border="3" width="600" align="center">
+					<tbody>
+						<tr>
+							<th>N°</th>
+							<th>Name</th>
+							<th>Capital</th>
+							<th>Coordinates</th>
+							<th>Neigbors</th>
+							<th>Flag</th>
+							<th>Spoken languages</th>
+						</tr>
 
-				<xsl:for-each select="//country/infosContinent[continent='Europe' and subregion='Northern Europe']">
-					<tr>
-						<td><xsl:number level="any"/></td>
-						<td>
-							<span style="color:green"><xsl:value-of select="../country_name/offic_name"/></span> (<xsl:value-of select="../country_name/offic_name"/>) <span style="color:blue"><xsl:value-of select="../country_name/native_name[@lang = 'fra']/offic_name"/> </span>
-						</td>
-						<td><xsl:value-of select="../capital"/></td>
-						<td>Latitude :<xsl:value-of select="../coordinates/@lat"/> 
-							Longitude :<xsl:value-of select="../coordinates/@lat"/>
-						</td>
-						<td> 
-							<xsl:for-each select="../borders/neighbour"> 
-								<xsl:value-of select="//country[country_codes/*=current()]/country_name/common_name"/> 
-								<xsl:if test= "position() !=last()">
-									,							
-								</xsl:if>
-							</xsl:for-each>
-						</td>
-						<td><img src="http://www.geonames.org/flags/x/fr.gif" height="40" width="60"/></td>
-						<td>
-							<xsl:for-each select= "../languages/*">
-								<xsl:value-of select= "text()"/>
-								<xsl:if test= "position() !=last()">
-									,							
-								</xsl:if>
-							</xsl:for-each>
-						</td>
-					</tr>
+					<xsl:for-each select="//country/infosContinent[continent=current()/../continent and subregion=current()]">
+						<tr>
+							<td><xsl:number level="any"/></td>
+							<td>
+								<span style="color:green"><xsl:value-of select="../country_name/offic_name"/></span> (<xsl:value-of select="../country_name/offic_name"/>) <span style="color:blue"><xsl:value-of select="../country_name/native_name[@lang = 'fra']/offic_name"/> </span>
+							</td>
+							<td><xsl:value-of select="../capital"/></td>
+							<td>Latitude :<xsl:value-of select="../coordinates/@lat"/> 
+								Longitude :<xsl:value-of select="../coordinates/@lat"/>
+							</td>
+							<td> 
+								<xsl:for-each select="../borders/neighbour"> 
+									<xsl:value-of select="//country[country_codes/*=current()]/country_name/common_name"/> 
+									<xsl:if test= "position() !=last()">
+										,							
+									</xsl:if>
+								</xsl:for-each>
+							</td>
+							<td><img src="http://www.geonames.org/flags/x/fr.gif" height="40" width="60"/></td>
+							<td>
+								<xsl:for-each select= "../languages/*">
+									<xsl:value-of select= "text()"/>
+									<xsl:if test= "position() !=last()">
+										,							
+									</xsl:if>
+								</xsl:for-each>
+							</td>
+						</tr>
+					</xsl:for-each>
+					</tbody>
+					</table>
 				</xsl:for-each>
-				</tbody>
-				</table>
 			</xsl:if>
 		</xsl:for-each>
 
