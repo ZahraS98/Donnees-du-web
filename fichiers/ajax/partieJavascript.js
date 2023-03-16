@@ -1,3 +1,7 @@
+// Globals
+
+var COUNTRIES_RESTAPI = "https://restcountries.com/v2/alpha/"
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function recupererPremierEnfantDeTypeElement(n) {
@@ -238,10 +242,13 @@ function enableMapHover(){
     for (var country of countries){
         // event on
         country.addEventListener('mouseover', (event)=>{
-            console.log(event.target.getAttribute("id"));
+            var country_code = event.target.getAttribute("id");
+            event.target.getAttribute("id");
             // code to show the details in table.
             event.target.setAttribute('class', 'land_onhover');
-            document.getElementById('country_info_table').innerHTML = event.target.getAttribute("countryname");
+            // document.getElementById('country_info_table').innerHTML = event.target.getAttribute("countryname");
+            infoPays(country_code);
+            // console.log(getCurrencyfromCode(event.target.id));
         });
         country.addEventListener('mouseleave', (event)=>{
             console.log('leave');
@@ -251,15 +258,15 @@ function enableMapHover(){
     }
 }
 
-function infoPays(val){
+function infoPays(country_code){
     
-    var xslDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/infoPays.xsl') ;
+    var xslDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/countryTable.xsl') ;
     var xsltProcessor = new XSLTProcessor();
     // Importation du .xsl
     xsltProcessor.importStylesheet(xslDocument);
 
 	//passage du param�tre � la feuille de style
-	xsltProcessor.setParameter("", "param_ref_type", val);
+	xsltProcessor.setParameter(null, "country_code", country_code);
 
     // Chargement du fichier XML � l'aide de XMLHttpRequest synchrone 
     var xmlDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml');
@@ -267,10 +274,34 @@ function infoPays(val){
     // Cr�ation du document XML transform� par le XSL
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
     // Recherche du parent (dont l'id est "here") de l'�l�ment � remplacer dans le document HTML courant
-    var elementHtmlParent = window.document.getElementById("id_element_a_remplacer");
+    var elementHtmlParent = window.document.getElementById("country_info_table");
 	// ins�rer l'�lement transform� dans la page html
     elementHtmlParent.innerHTML = newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML;
     console.log(newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML);
 
+}
+
+function getCurrencyfromCode(country_code){
+
+    var theUrl = COUNTRIES_RESTAPI + country_code.toLowerCase();
+    // var xmlHttp = new XMLHttpRequest();
+    // xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    // xmlHttp.setRequestHeader("Access-Control-Allow-Origin","*");
+    // xmlHttp.setRequestHeader("Access-Control-Allow-Credentials", "false");
+    // xmlHttp.setRequestHeader("Access-Control-Allow-Methods", "GET, PUT, POST");
+    // xmlHttp.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    // xmlHttp.send( null );
+    // return xmlHttp.responseText;
+
+    fetch(theUrl, {mode: 'cors', headers: {
+        'Access-Control-Allow-Origin':'*'
+      }})
+        .then(function(res) {
+            // handle the response
+            console.log(res);
+        })
+        .catch(function() {
+            // handle the error
+        });
 }
 
