@@ -53,8 +53,8 @@
             <span id="id_nom_a_remplacer" style="color: red; font-weight: bold;">LES NOMS (Cet &eacute;l&eacute;ment va &ecirc;tre remplac&eacute; par les noms) </span>.</p>
     </div>
     <div>
-        <input name="countrycode" id="countrycode" onChange="cherchePays(document.getElementById('countrycode').value);" type="text" placeholder="enter pay"/>
-        
+        <input name="countrycode" id="countrycode" type="text" placeholder="enter pay"/>
+        <input type="button" value="check"name="sendcountrycode" id="scc" onclick="cherchePays(document.getElementById('countrycode').value);"/>
     </div>
     <br/>
     <div id="id_element_a_remplacer">
