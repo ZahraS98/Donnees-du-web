@@ -45,7 +45,7 @@
 				<xsl:for-each select="//country/infosContinent[continent=current()]/subregion[not(text()=preceding::subregion/text())]">
 					<h4> <xsl:value-of select="current()"/> (<xsl:value-of select="count(//country/infosContinent[subregion=current() and continent = current()/../continent])"/>)</h4>
 
-					<table border="3" width="600" align="center">
+					<table border="3" width="100%" align="center">
 					<tbody>
 						<tr>
 							<th>N°</th>
