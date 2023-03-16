@@ -42,7 +42,7 @@
 	<xsl:for-each select="//country/infosContinent/continent[not(text()=preceding::continent/text())]">
 		<xsl:if test="current() !=''">
 			<h3>Pays du continent : <xsl:value-of select="current()"/> par sous-régions :</h3>
-				<h4>Caribbean (27 pays)</h4>
+				<h4><xsl:value-of select="//country/infosContinent[continent=current()]/subregion[not(text()=preceding::subregion/text())]"/> (27 pays)</h4>
 
 				<table border="3" width="600" align="center">
 				<tbody>
