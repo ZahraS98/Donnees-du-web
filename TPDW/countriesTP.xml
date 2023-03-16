@@ -4,7 +4,7 @@
 -->
 <!--<?xml-stylesheet type="text/xsl" href="TPSol.xsl"?>
 -->
-<?xml-stylesheet type="text/xsl" href="file:///Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/TPDW/pays_du_monde_tableau_3IF.xsl"?> 
+<?xml-stylesheet type="text/xsl" href="pays_du_monde_tableau_3IF_16-3.xsl"?> 
 
 <!DOCTYPE countries SYSTEM "countries.dtd">
 

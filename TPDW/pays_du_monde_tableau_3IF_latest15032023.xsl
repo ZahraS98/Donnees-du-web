@@ -53,7 +53,7 @@
 			<th>Spoken languages</th>
 
 			</tr>
-		<tbody>
+		</tbody>
 		</table>
 		<h4>South America (15 pays)</h4>
 		<table border="3" width="100%" align="center"></table>
