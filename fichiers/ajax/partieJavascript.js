@@ -156,7 +156,7 @@ function Bouton4_ajaxEmployeesTableau(xmlDocumentUrl, xslDocumentUrl) {
 }
 
 function changeBg(){
-    document.body.style.backgroundColor = "black";
+    document.body.style.backgroundColor = "blue";
     document.body.style.color = "white";
 }
 
