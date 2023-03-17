@@ -26,16 +26,22 @@
 		<!--xsl:apply-templates/-->
 		<p>Countries where more than 2 langauges are spoken:</p>
 		<xsl:for-each select="//country[languages[count(*)>2]]">
-        <ul>
-			<li><xsl:value-of select="country_name/common_name"/> :  <xsl:value-of select="languages"/> 
-			<!-- <xsl:for-each select="languages"> -->
-			<!-- </xsl:for-each> -->
-			<!-- <xsl:value-of select="languages"/> -->
+        <ul style="line-height:1;">
+			<li ><xsl:value-of select="country_name/common_name"/> :  
+				<xsl:for-each select="languages/*"> 
+					<xsl:value-of select="text()"/> (<xsl:value-of select="name()"/>) 
+					<xsl:if test= "position() !=last()">
+						,							
+					</xsl:if>
+				</xsl:for-each>
+				
 			</li>
+			
 		</ul>
       </xsl:for-each>
 	  
 	  	<p>Countries having the most neighbours:</p>
+		
 		<hr/>
 
 		<!--Americas-->
@@ -43,7 +49,7 @@
 			<xsl:if test="current() !=''">
 				<h3>Pays du continent : <xsl:value-of select="current()"/> par sous-régions :</h3>
 				<xsl:for-each select="//country/infosContinent[continent=current()]/subregion[not(text()=preceding::subregion/text())]">
-					<h4> <xsl:value-of select="current()"/> (<xsl:value-of select="count(//country/infosContinent[subregion=current() and continent = current()/../continent])"/>)</h4>
+					<h4> <xsl:value-of select="current()"/> (<xsl:value-of select="count(//country/infosContinent[subregion=current() and continent = current()/../continent])"/> pays)</h4>
 
 					<table border="3" width="100%" align="center">
 					<tbody>
@@ -59,13 +65,20 @@
 
 					<xsl:for-each select="//country/infosContinent[continent=current()/../continent and subregion=current()]">
 						<tr>
-							<td><xsl:number level="any"/></td>
+							<td><xsl:value-of select="position()"/></td>
 							<td>
-								<span style="color:green"><xsl:value-of select="../country_name/offic_name"/></span> (<xsl:value-of select="../country_name/offic_name"/>) <span style="color:blue"><xsl:value-of select="../country_name/native_name[@lang = 'fra']/offic_name"/> </span>
+								<tr><span style="color:green"><xsl:value-of select="../country_name/offic_name"/></span> (<xsl:value-of select="../country_name/offic_name"/>)</tr> 
+								<tr><span style="color:blue"> 
+									<xsl:choose>
+										<xsl:when test="../country_name/native_name[@lang = 'fra']/offic_name">
+											Nom francais: <xsl:value-of select="../country_name/native_name[@lang = 'fra']/offic_name"/> 
+										</xsl:when>
+									</xsl:choose>
+								</span></tr>
 							</td>
 							<td><xsl:value-of select="../capital"/></td>
-							<td>Latitude :<xsl:value-of select="../coordinates/@lat"/> 
-								Longitude :<xsl:value-of select="../coordinates/@lat"/>
+							<td><tr>Latitude :<xsl:value-of select="../coordinates/@lat"/> </tr>
+								<tr>Longitude :<xsl:value-of select="../coordinates/@long"/> </tr>
 							</td>
 							<td> 
 								<xsl:choose>
