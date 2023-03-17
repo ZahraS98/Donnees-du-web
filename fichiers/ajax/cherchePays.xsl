@@ -10,17 +10,14 @@
 			<BODY bgcolor="#FFFFCC">
 				<H1>Pay</H1>
 				<element_a_recuperer>
-					<ul>
-					<!-- <xsl:value-of select="$param_ref_type"/> -->
-						<xsl:apply-templates select="//countries"/>
-					</ul>
-				</element_a_recuperer>
+				<ul><xsl:apply-templates select="//countries"/></ul></element_a_recuperer>
 			</BODY>
 		</HTML>
 	</xsl:template>
-	<xsl:template match="//countries">	 
-		<li>
-			<xsl:value-of select="//country[country_codes/*=$param_ref_type]/country_name/common_name"/>.
-  		</li>
+	
+	<xsl:template match="//countries">
+	<li>
+		<xsl:value-of select="//country[country_codes/*=$param_ref_type]/country_name/common_name"/>
+	</li>
 	</xsl:template>
 </xsl:stylesheet>

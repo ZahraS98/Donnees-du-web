@@ -16,7 +16,7 @@
   font-size: 90%;
   line-height: normal;
   font-size-adjust: none;
-  font-stretch: normal;
+  font-stretch: normal;  
 }
  
  #main p.xml {
@@ -38,4 +38,8 @@
   stroke:white;
   stroke-opacity: 1;
   stroke-width:0.5;
+}
+.flying_div{
+  position:absolute;
+  transform:translate(-50%,-50%);
 }

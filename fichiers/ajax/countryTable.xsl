@@ -10,7 +10,7 @@
     <html>
         <body style="background-color:white;">
         <element_a_recuperer>
-            <table border="3" width="20%" align="center">  <!-- I THINK THESE VARIABLES NEED TO BE CHANGED -->
+            <table style="background-color:beige;" border="2" width="24%" align="center">  <!-- I THINK THESE VARIABLES NEED TO BE CHANGED -->
                 <tbody>
 
                 <tr>

@@ -1,7 +1,10 @@
 // Globals
 
-var COUNTRIES_RESTAPI = "https://restcountries.com/v2/alpha/"
-
+const COUNTRIES_RESTAPI = "https://restcountries.com/v2/alpha/"
+var country_names_set = new Array();
+var countries_dataset = new Object();
+var language_dataset = new Object();
+var selected_country = "";
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function recupererPremierEnfantDeTypeElement(n) {
@@ -114,7 +117,6 @@ function Bouton3_ajaxBibliographie(xmlDocumentUrl, xslDocumentUrl, baliseElement
     
 	// ins�rer l'�lement transform� dans la page html
     elementHtmlParent.innerHTML=newXmlDocument.getElementsByTagName(baliseElementARecuperer)[0].innerHTML;
-	
 
 }
 
@@ -173,9 +175,8 @@ function cherchePays(val){
     // Importation du .xsl
     xsltProcessor.importStylesheet(xslDocument);
 
-	//passage du param�tre � la feuille de style
-    console.log(val)
-	xsltProcessor.setParameter(null, "param_ref_type", val);
+	//passage du param�tre � la feuille de style 
+	xsltProcessor.setParameter(null, "param_ref_type", val.toUpperCase());
 
     // Chargement du fichier XML � l'aide de XMLHttpRequest synchrone 
     var xmlDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml');
@@ -183,11 +184,16 @@ function cherchePays(val){
     // Cr�ation du document XML transform� par le XSL
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
     // Recherche du parent (dont l'id est "here") de l'�l�ment � remplacer dans le document HTML courant
-    var elementHtmlParent = window.document.getElementById("id_element_a_remplacer");
+    // var elementHtmlParent = window.document.getElementById("show_cherche_result");
 	// ins�rer l'�lement transform� dans la page html
-    elementHtmlParent.innerHTML = newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML;
-    console.log(newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML);
-
+    // elementHtmlParent.ariaPlaceholder = newXmlDocument.getElementsByTagName('element_a_recuperer')[0].textContent;
+    var result =  newXmlDocument.getElementsByTagName('element_a_recuperer')[0];
+    window.document.getElementById("show_cherche_result_pretty").innerHTML = result.innerHTML;
+    // console.log(newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML);
+    
+    // selected country 
+    selected_country =result.innerText;
+    
 }
 var svg_title;
 function loadSVG(path){
@@ -253,13 +259,28 @@ function enableMapHover(){
         country.addEventListener('mouseleave', (event)=>{
             console.log('leave');
             event.target.setAttribute('class', 'land');
+            window.document.getElementById("country_info_table") = "";
             // code to show the details in table.
         });
     }
+    // Init
+    generateDatalist();
+    document.getElementById('countrycode').addEventListener('input', autocompleteCountryText);
+    flying_div();
 }
 
+function flying_div(){
+    document.addEventListener('mousemove', function(event) {        
+        let table = document.getElementById('country_info_table');
+        var x = event.clientX + 100;
+        var y = event.clientY +100;
+        table.style.left = x + "px";
+        table.style.top = y + "px";
+      });
+}
+// country table on hover
 function infoPays(country_code){
-    
+
     var xslDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/countryTable.xsl') ;
     var xsltProcessor = new XSLTProcessor();
     // Importation du .xsl
@@ -278,9 +299,10 @@ function infoPays(country_code){
 	// ins�rer l'�lement transform� dans la page html
     elementHtmlParent.innerHTML = newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML;
     console.log(newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML);
-
+ 
 }
 
+// API request code
 function getCurrencyfromCode(country_code){
 
     var theUrl = COUNTRIES_RESTAPI + country_code.toLowerCase();
@@ -305,3 +327,74 @@ function getCurrencyfromCode(country_code){
         });
 }
 
+// datalist generation for countries and codes
+function generateDatalist(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        // Parse the XML response
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(this.responseText, "text/xml");
+        var data = []; // country name
+        var data2 = []; // country code
+        /* Datalist for cca2 */
+        // Traverse the DOM tree to extract the data you need
+        var items = xmlDoc.getElementsByTagName("country");
+        for (var i = 0; i < items.length; i++) {
+            
+            try{
+                // console.log(items[i].children[0].children[0].textContent, items[i].children[2].children[0].textContent)
+                data2.push(items[i].children[2].children[0].textContent);
+                data.push(items[i].children[0].children[0].textContent);
+                
+            }catch(e){}
+        }
+
+        // Create a datalist element and add it to the DOM
+        var datalist = document.createElement("datalist");
+        datalist.id = "country_common_names";
+        document.body.appendChild(datalist);
+
+        // Populate the datalist element with options based on the extracted data
+        for (var i = 0; i < data.length; i++) {
+            var option = document.createElement("option");
+            option.value = data2[i];
+            option.innerText = data[i];
+            datalist.appendChild(option);
+        }
+        // console.log(datalist);
+        countries_dataset = document.getElementById("country_common_names");
+    }
+    };
+    xhttp.open("GET", "/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml", true);
+    xhttp.send();
+}
+
+function autocompleteCountryText(event){
+
+    var inputValue = event.target.value.toLowerCase();
+    if(inputValue.length > 3){
+        var matches;
+        // Filter the options in the datalist to find matches
+        var options = countries_dataset.options;
+        var matches = Array.prototype.filter.call(options, function(option) {
+            return option.innerText.toLowerCase().indexOf(inputValue) !== -1;
+        });
+
+        // Clear the datalist and add the matching options show_autocomplete_result_pretty
+        
+        document.getElementById('show_autocomplete_result_pretty_ul').innerHTML = "";
+    
+        matches.forEach(function(match) {
+            console.log(match)
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(match.innerText));
+            document.getElementById('show_autocomplete_result_pretty_ul').appendChild(li);
+        });
+        console.log(matches)
+        if(matches.length == 1){
+            selected_country = matches[0].innerText;
+        }
+    }
+    
+}

@@ -53,16 +53,20 @@
             <span id="id_nom_a_remplacer" style="color: red; font-weight: bold;">LES NOMS (Cet &eacute;l&eacute;ment va &ecirc;tre remplac&eacute; par les noms) </span>.</p>
     </div>
     <div>
-        <input name="countrycode" id="countrycode" type="text" placeholder="enter pay"/>
-        <input type="button" value="check"name="sendcountrycode" id="scc" onclick="cherchePays(document.getElementById('countrycode').value);"/>
+        <input name="countrynameinput" id="countrycode" type="text" placeholder="enter pay"/>
+        <input type="button" value="check country code"name="sendcountrycode" id="scc" onclick="cherchePays(document.getElementById('countrycode').value);"/>
     </div>
+    <br/>
+     <div id="show_cherche_result_pretty"></div>
+     <br/>
+     <div id="show_autocomplete_result_pretty">
+        <ul type="circle" id="show_autocomplete_result_pretty_ul"></ul>
+     </div>
     <br/>
     <div id="id_element_a_remplacer">
         <p style="color: red; font-weight: bold;">Cet &eacute;l&eacute;ment va &ecirc;tre remplac&eacute; par une bibliographie en XML mise en forme par une feuille de style XSLT...</p>
     </div>
-    <div id="country_info_table">
-
-    </div>
+    <div class="flying_div" id="country_info_table"> </div>
 
 </body>
 
