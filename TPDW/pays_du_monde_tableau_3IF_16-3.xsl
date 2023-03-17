@@ -39,8 +39,27 @@
 			
 		</ul>
       </xsl:for-each>
-	  
-	  	<p>Countries having the most neighbours:</p>
+	  	
+		<xsl:variable name="my-variable" select="//element/@attribute"/>
+	  	
+		 Countries having the most neighbours: <xsl:variable name="maxNeighbors">
+        <xsl:for-each select="//country">
+            <xsl:sort select="count(borders/neighbour)" data-type="number" order="descending"/>
+            <xsl:if test="position() = 1">
+            <xsl:value-of select="count(borders/neighbour)"/>
+            </xsl:if>
+        </xsl:for-each>
+        </xsl:variable>
+	
+
+        <!-- Output the names of all countries with the maximum number of neighbors -->
+        <xsl:for-each select="//country">
+        <xsl:if test="count(borders/neighbour) = $maxNeighbors">
+            <xsl:value-of select="country_name/common_name"/>
+            <xsl:text>, </xsl:text>
+        </xsl:if>
+        </xsl:for-each> nb de voisins : <xsl:value-of select="$maxNeighbors"/>
+
 		
 		<hr/>
 
