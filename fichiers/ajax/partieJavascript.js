@@ -393,12 +393,14 @@ function generateDatalist(){
     xhttp.open("GET", XML_COUNTRIES, true);
     xhttp.send();
 }
+
 // check if selected country has similar languages, color
 function resetLanguageColors(){
     for(var path of document.getElementsByTagName('path')){
         path.setAttribute("class", "land");
     }
 }
+
 function checkLanguages(lang_str){
     
     var check_arr = lang_str.slice(0,-2).split(",");
@@ -478,6 +480,7 @@ function randomInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// ### Solution 12
 function generateRandomCountry(){
     random_country = countries_dataset.options[randomInteger(0, countries_dataset.options.length-1)];
     document.getElementById('guess_the_country').innerHTML = random_country.innerText;
