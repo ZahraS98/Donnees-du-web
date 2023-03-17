@@ -4,8 +4,9 @@ const COUNTRIES_RESTAPI = "https://restcountries.com/v2/alpha/";
 var country_names_set = new Array();
 var countries_dataset = new Object();
 var language_dataset = new Object();
+var random_country = false;
 var selected_country = "";
-
+var hover_table_toggle = false;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function recupererPremierEnfantDeTypeElement(n) {
@@ -238,7 +239,14 @@ function makeClickableMap(){
     for (var country of countries){
         // event on
         country.addEventListener('click', (event)=>{
-            alert(event.target.getAttribute("countryname"))
+            
+            if(random_country === event.target.id){
+                alert("You are correct!", event.target.getAttribute("countryname"));
+                generateRandomCountry();
+            }else{  
+                alert(event.target.getAttribute("countryname"));
+            }
+            
         });
     }
 }
@@ -248,11 +256,13 @@ function enableMapHover(){
     for (var country of countries){
         // event on
         country.addEventListener('mouseover', (event)=>{
-            var country_code = event.target.getAttribute("id");
-            event.target.getAttribute("id");
-            // code to show the details in table.
-            event.target.setAttribute('class', 'land_onhover');
-            infoPays(country_code);
+            
+                var country_code = event.target.getAttribute("id");
+                event.target.getAttribute("id");
+                // code to show the details in table.
+                event.target.setAttribute('class', 'land_onhover');
+                infoPays(country_code);
+            
             
         });
         country.addEventListener('mouseleave', (event)=>{
@@ -261,7 +271,8 @@ function enableMapHover(){
             // code to show the details in table.
         });
     }
-    // Init
+    // Initialise the functions and values.
+    hover_table_toggle = true;
     generateDatalist();
     document.getElementById('countrycode').addEventListener('input', autocompleteCountryText);
     flying_div();
@@ -293,10 +304,12 @@ function infoPays(country_code){
     // Cr�ation du document XML transform� par le XSL
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
     // Recherche du parent (dont l'id est "here") de l'�l�ment � remplacer dans le document HTML courant
-    var elementHtmlParent = window.document.getElementById("country_info_table");
-	// ins�rer l'�lement transform� dans la page html
-    elementHtmlParent.innerHTML = newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML;
-    console.log(newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML);
+    if(hover_table_toggle){
+        var elementHtmlParent = window.document.getElementById("country_info_table");
+        // ins�rer l'�lement transform� dans la page html
+        elementHtmlParent.innerHTML = newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML;
+        console.log(newXmlDocument.getElementsByTagName('element_a_recuperer')[0].innerHTML);
+    }
  
 }
 
@@ -456,3 +469,14 @@ function getCountryOptionValue(test_str){
     }
 }
 
+// ### Solution 12 
+function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateRandomCountry(){
+    random_country = countries_dataset.options[randomInteger(0, countries_dataset.options.length-1)];
+    document.getElementById('guess_the_country').innerHTML = random_country.innerText;
+    random_country = random_country.value.slice(-2);
+    hover_table_toggle = false;
+}   
