@@ -33,12 +33,21 @@
 }
 
 .land_onhover{
-  fill: #006600;
+  fill: #03367e;
   fill-opacity: 1;
   stroke:white;
   stroke-opacity: 1;
   stroke-width:0.5;
 }
+
+.land_green{
+  fill: #0a9023;
+  fill-opacity: 1;
+  stroke:white;
+  stroke-opacity: 1;
+  stroke-width:0.5;
+}
+
 .flying_div{
   position:absolute;
   transform:translate(-50%,-50%);

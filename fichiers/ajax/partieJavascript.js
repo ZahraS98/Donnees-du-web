@@ -259,7 +259,7 @@ function enableMapHover(){
         country.addEventListener('mouseleave', (event)=>{
             console.log('leave');
             event.target.setAttribute('class', 'land');
-            window.document.getElementById("country_info_table") = "";
+            window.document.getElementById("country_info_table").innerHTML = "";
             // code to show the details in table.
         });
     }
