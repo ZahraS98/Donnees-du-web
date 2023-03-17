@@ -1,12 +1,17 @@
-// Globals
+// Globals (ENV)
 
 const COUNTRIES_RESTAPI = "https://restcountries.com/v2/alpha/";
+const XML_COUNTRIES = '/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml';
+const XSL_COUNTRY_TABLE = '/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/countryTable.xsl';
+const XSL_CHERCHE_PAYS = '/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/cherchePays.xsl';
+const PRESENT_DIRECTORY = '/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/';
 var country_names_set = new Array();
 var countries_dataset = new Object();
 var language_dataset = new Object();
 var random_country = false;
 var selected_country = "";
 var hover_table_toggle = false;
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function recupererPremierEnfantDeTypeElement(n) {
@@ -173,7 +178,7 @@ function resetBg(){
 // ### Solution 3
 function cherchePays(val){
     
-    var xslDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/cherchePays.xsl') ;
+    var xslDocument = chargerHttpXML(XSL_CHERCHE_PAYS) ;
     var xsltProcessor = new XSLTProcessor();
     // Importation du .xsl
     xsltProcessor.importStylesheet(xslDocument);
@@ -182,7 +187,7 @@ function cherchePays(val){
 	xsltProcessor.setParameter(null, "param_ref_type", val.toUpperCase());
 
     // Chargement du fichier XML � l'aide de XMLHttpRequest synchrone 
-    var xmlDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml');
+    var xmlDocument = chargerHttpXML(XML_COUNTRIES);
 
     // Cr�ation du document XML transform� par le XSL
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
@@ -203,7 +208,7 @@ function cherchePays(val){
 // ### Solution 4, 5, 6
 var svg_title;
 function loadSVG(path){
-    var svg = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/'+path);
+    var svg = chargerHttpXML(PRESENT_DIRECTORY+path);
     var serializer = new XMLSerializer();
     svg_title = svg.title;
     var str = serializer.serializeToString(svg);
@@ -239,7 +244,6 @@ function makeClickableMap(){
     for (var country of countries){
         // event on
         country.addEventListener('click', (event)=>{
-            
             if(random_country === event.target.id){
                 alert("You are correct!", event.target.getAttribute("countryname"));
                 generateRandomCountry();
@@ -290,7 +294,7 @@ function flying_div(){
 // ### Solution 8 country table on hover
 function infoPays(country_code){
 
-    var xslDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/ajax/countryTable.xsl') ;
+    var xslDocument = chargerHttpXML(XSL_COUNTRY_TABLE) ;
     var xsltProcessor = new XSLTProcessor();
     // Importation du .xsl
     xsltProcessor.importStylesheet(xslDocument);
@@ -299,7 +303,7 @@ function infoPays(country_code){
 	xsltProcessor.setParameter(null, "country_code", country_code);
 
     // Chargement du fichier XML � l'aide de XMLHttpRequest synchrone 
-    var xmlDocument = chargerHttpXML('/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml');
+    var xmlDocument = chargerHttpXML(XML_COUNTRIES);
 
     // Cr�ation du document XML transform� par le XSL
     var newXmlDocument = xsltProcessor.transformToDocument(xmlDocument);
@@ -386,7 +390,7 @@ function generateDatalist(){
         countries_dataset = document.getElementById("country_common_names");
     }
     };
-    xhttp.open("GET", "/Users/ombahiwal/Desktop/INSABioSciences/DonneesDuWeb/LabStatementTP/fichiers/countriesTP.xml", true);
+    xhttp.open("GET", XML_COUNTRIES, true);
     xhttp.send();
 }
 // check if selected country has similar languages, color
