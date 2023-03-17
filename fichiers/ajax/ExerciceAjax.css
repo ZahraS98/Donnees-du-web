@@ -16,7 +16,7 @@
   font-size: 90%;
   line-height: normal;
   font-size-adjust: none;
-  font-stretch: normal;
+  font-stretch: normal;  
 }
  
  #main p.xml {
@@ -33,9 +33,26 @@
 }
 
 .land_onhover{
-  fill: #006600;
+  fill: #1f87ef;
   fill-opacity: 1;
   stroke:white;
   stroke-opacity: 1;
   stroke-width:0.5;
+}
+
+.land_green{
+  fill: #0a9023;
+  fill-opacity: 1;
+  stroke:white;
+  stroke-opacity: 1;
+  stroke-width:0.5;
+}
+
+.flying_div{
+  position:absolute;
+  transform:translate(-50%,-50%);
+}
+
+table{
+  color:black;  ;
 }
